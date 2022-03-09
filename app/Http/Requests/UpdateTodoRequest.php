@@ -26,6 +26,7 @@ class UpdateTodoRequest extends FormRequest
     public function rules()
     {
         return [
+            'subject' => ['required','string', 'max:50'],
             'body' => ['nullable','string'],
         ];
     }

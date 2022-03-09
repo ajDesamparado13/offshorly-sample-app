@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(
-    ['middleware' => []],
+    ['middleware' => ['auth:sanctum']],
     function () {
         Route::group(
             ['prefix' => 'todos'],
@@ -29,8 +29,9 @@ Route::group(
                 Route::patch('incomplete/{todo}', [TodoController::class, 'incomplete']);
                 Route::get('{todo}', [TodoController::class,'show']);
                 Route::put('{todo}', [TodoController::class,'update']);
-                Route::delete('{todo}', [TodoController::class,'show']);
+                Route::delete('{todo}', [TodoController::class,'destroy']);
                 Route::get('', [TodoController::class,'index']);
+                Route::post('', [TodoController::class,'store']);
             }
         );
     }

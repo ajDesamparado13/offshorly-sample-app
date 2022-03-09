@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Parsers\CriteriaParser;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 class IndexTodoRequest extends FormRequest
 {
@@ -26,5 +28,22 @@ class IndexTodoRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * all
+     *
+     * @param  mixed $keys
+     * @return array
+     */
+    public function all($keys = null): array
+    {
+        $params = parent::all($keys);
+        if (Arr::hasAny($params, CriteriaParser::CRITERIA_FIELDS)) {
+            foreach (CriteriaParser::parseRequest($this) as $criteria => $param) {
+                $params[$criteria] = $param;
+            }
+        }
+        return $params;
     }
 }

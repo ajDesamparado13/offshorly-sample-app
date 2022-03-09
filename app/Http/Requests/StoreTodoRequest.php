@@ -13,7 +13,7 @@ class StoreTodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class StoreTodoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'subject' => ['required', 'string', 'max:50', 'min:1'],
         ];
+    }
+
+    /**
+     * messages
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [];
     }
 }

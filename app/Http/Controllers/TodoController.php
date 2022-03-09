@@ -7,9 +7,21 @@ use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
 use App\Models\Todo;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
+use Subsystem\Status\Constants\StatusConst;
 
 class TodoController extends ApiController
 {
+    public function __construct()
+    {
+        Todo::addGlobalScope(
+            'user-data',
+            function ($builder) {
+                $builder->where('user_id', \Auth::user()->id);
+            }
+        );
+
+    }
     /**
      * transformer
      *
@@ -27,7 +39,28 @@ class TodoController extends ApiController
      */
     public function index(IndexTodoRequest $request)
     {
-        return $this->toResource(Todo::paginate());
+        if ($request->has('search')) {
+            $search = $request->all()['search'];
+            if (Arr::has($search, 'subject')) {
+                Todo::addGlobalScope(
+                    'filter-by-subject',
+                    function ($builder) use ($search) {
+                        $subject = Arr::get($search, 'subject', '');
+                        return $builder->where('subject', 'like', "%$subject%");
+                    }
+                );
+            }
+            if (Arr::has($search, 'status')) {
+                Todo::addGlobalScope(
+                    'filter-by-status',
+                    function ($builder) use ($search) {
+                        $status_id = StatusConst::getId(Arr::get($search, 'status', ''));
+                        return $builder->whereStatusId($status_id);
+                    }
+                );
+            }
+        }
+        return $this->toResource(Todo::get());
     }
 
     /**
@@ -38,7 +71,10 @@ class TodoController extends ApiController
      */
     public function store(StoreTodoRequest $request)
     {
-        $todo = Todo::create($request->validated());
+        $params = $request->validated();
+        data_set($params, 'status_id', StatusConst::INCOMPLETE_STATUS_ID);
+        data_set($params, 'user_id', \Auth::user()->id);
+        $todo = Todo::create($params);
         return $this->toResource($todo);
     }
 

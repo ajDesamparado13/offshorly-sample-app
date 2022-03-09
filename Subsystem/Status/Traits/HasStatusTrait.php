@@ -33,6 +33,10 @@ trait HasStatusTrait
      */
     public static function bootHasStatusTrait()
     {
+        static::creating(
+            function (WithStatusContract $model) {
+            }
+        );
         static::saving(
             function (WithStatusContract $model) {
                 if ($model->hasCompleted()) {

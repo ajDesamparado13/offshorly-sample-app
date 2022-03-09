@@ -24,6 +24,7 @@ class Todo extends Model implements WithStatusContract
     protected $fillable = [
         'user_id',
         'subject',
+        'status_id',
         'body',
     ];
 

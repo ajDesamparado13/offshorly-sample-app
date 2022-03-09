@@ -97,6 +97,7 @@ export default {
                 await axios.post(`todos`,this.todo);
                 this.getTodos();
                 this.todo = {}
+                window.alert("Successfully Added new Todo")
             }catch(error) {
                 window.alert(error.response.data.message)
             }
@@ -106,7 +107,7 @@ export default {
             try{
                 await axios.put(`todos/${todo.id}`,todo);
                 this.getTodos();
-                window.alert("Update successful")
+                window.alert(`Successfully Update Todo`)
             }catch(error) {
                 window.alert(error.response.data.message)
             }
@@ -115,7 +116,7 @@ export default {
         {
             await axios.delete(`todos/${todo.id}`);
             this.getTodos();
-            window.alert("Delete successful")
+                window.alert(`Successfully Delete Todo`)
         },
         async getTodos()
         {

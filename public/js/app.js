@@ -21876,20 +21876,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.getTodos();
 
                 _this2.todo = {};
-                _context.next = 10;
+                window.alert("Successfully Added new Todo");
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 window.alert(_context.t0.response.data.message);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }))();
     },
     updateTodo: function updateTodo(todo) {
@@ -21907,7 +21908,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 _this3.getTodos();
 
-                window.alert("Update successful");
+                window.alert("Successfully Update Todo");
                 _context2.next = 10;
                 break;
 
@@ -21938,7 +21939,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 _this4.getTodos();
 
-                window.alert("Delete successful");
+                window.alert("Successfully Delete Todo");
 
               case 4:
               case "end":

@@ -1,3 +1,35 @@
+
+# Introduction
+This is an example app for offshorly using Laravel 9 and Inertia JS with mixed of API implementation for VueJS
+
+<br>
+<br>
+
+#### List of Features
+- Todo CRUD
+- User CRUD
+<br>
+<br>
+
+# Getting Started
+
+### Prerequisites: 
+- Docker
+- docker-compose
+- php > 7.3
+- npm 
+- node 
+
+### Installation
+
+The sample app is using laravel and to build simple clone the repository and run `./vendor/bin/sail up`
+
+#### Sample user and password
+- admin@gmail.com : password
+- user@gmail.com : password
+
+
+# About the framework
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
